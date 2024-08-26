@@ -12,7 +12,7 @@ Dealing with basic techniques from sprint 1 & 2, I was interduced to more grid l
 
 P.s I was going to have a screenshot of the overall project on the readme.md page but I wasnt sure out to import an image, or if its even possible.
 
-Link to Github Pages:
+Link to Github Pages: https://github.com/Ahijaz1/se_project_aroundtheus.git
 
 ### Overview
 
