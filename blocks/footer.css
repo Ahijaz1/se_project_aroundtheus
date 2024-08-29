@@ -4,7 +4,7 @@
   max-width: 920px;
   margin-right: auto;
   width: 100%;
-  padding: 0 20px;
+  padding: 0 19px;
   box-sizing: border-box;
 }
 
@@ -16,10 +16,20 @@
   padding-bottom: 60px;
 }
 
+.footer,
+.push {
+  height: 50px;
+}
+
 @media screen and (max-width: 320px) {
   .footer {
-    margin-bottom: 36px;
     font-size: 14px;
     line-height: 16.94px;
+  }
+
+  .footer__copyright {
+    font-size: 14px;
+    line-height: 16.94px;
+    padding-bottom: 36px;
   }
 }
