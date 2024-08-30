@@ -22,7 +22,6 @@
   padding-right: 20px;
   align-items: center;
   justify-content: space-between;
-  white-space: nowrap;
 }
 
 .card__description-title {
@@ -31,6 +30,7 @@
   line-height: 29.05px;
   overflow: hidden;
   text-overflow: ellipsis;
+  white-space: nowrap;
   margin: 0;
 }
 
