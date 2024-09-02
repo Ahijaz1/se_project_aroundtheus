@@ -41,7 +41,6 @@
   border: 2px solid white;
   cursor: pointer;
   border-radius: 2px;
-  margin-left: auto;
 }
 
 .profile__add-button:hover {
@@ -66,6 +65,9 @@
   grid-area: description;
   margin: 0;
   max-width: 400px;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
 }
 
 .profile__image {
@@ -88,6 +90,7 @@
     flex-wrap: wrap;
     justify-content: center;
     width: 100%;
+    max-width: 320px;
   }
 
   .profile__edit-button {
@@ -115,6 +118,6 @@
 
   .profile__image {
     margin: 0;
-    padding: 42px 99px, 0, 101px;
+    padding: 42px 99px 0 101px;
   }
 }
