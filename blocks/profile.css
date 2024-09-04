@@ -91,6 +91,7 @@
     justify-content: center;
     width: 100%;
     max-width: 320px;
+    padding-top: 30px;
   }
 
   .profile__edit-button {
@@ -100,7 +101,7 @@
 
   .profile__add-button {
     width: 282px;
-    margin-left: 0;
+    margin: 36px 19px 0;
     border-color: white;
   }
 
@@ -120,6 +121,5 @@
 
   .profile__image {
     margin: 0;
-    padding: 42px 99px 0 101px;
   }
 }
