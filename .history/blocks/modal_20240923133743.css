@@ -1,0 +1,93 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  padding: 0 19px;
+}
+
+.modal__container {
+  position: relative;
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 10px;
+  margin: auto;
+  width: 430px;
+  height: 330px;
+}
+
+.modal__close {
+  position: absolute;
+  cursor: pointer;
+  bottom: calc(100% + 5px);
+  left: calc(100% + 5px);
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-image: url("../images/card-images/Close.svg");
+  background-color: transparent;
+  background-repeat: no-repeat;
+  background-size: contain;
+}
+
+.modal__heading {
+  color: #000;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29.05px;
+}
+
+.modal__form {
+  display: grid;
+  justify-content: center;
+  border: 1px;
+}
+
+.modal__button {
+  color: #fff;
+  line-height: 21.78px;
+  align-items: center;
+  background-color: #000;
+  height: 50.15px;
+  border-radius: 2px;
+}
+
+.modal__form-input-title {
+  width: 358px;
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+  height: 27.26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+  margin: 54px 29.74px;
+}
+
+.modal__form-input-description {
+  width: 358px;
+  font-weight: 400;
+  font-size: 14px; /*check font*/
+  border: none;
+  height: 27.26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+@media only screen and (max-width: 600px) {
+  .modal__container {
+    padding: 20px;
+  }
+
+  .modal__form,
+  .modal__heading,
+  .modal__form-input-title,
+  .modal__form-input-description,
+  .modal__button {
+    width: 100%;
+    font-size: 14px;
+    margin: 10px 0;
+  }
+}

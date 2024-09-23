@@ -1,0 +1,24 @@
+.modal {
+  position: fixed;
+  top: 0;
+  background-color: aquamarine;
+  display: flex;
+}
+
+.modal__container {
+  background-color: #fff;
+  padding: 36px;
+  border-radius: 10px;
+}
+
+.modal__close {
+}
+
+.modal__heading {
+}
+
+.modal__form {
+}
+
+.modal__button {
+}

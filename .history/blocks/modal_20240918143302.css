@@ -1,0 +1,21 @@
+.modal {
+  position: fixed;
+  top: 0;
+  background-color: aquamarine;
+}
+
+.modal__container {
+  background-color: #fff;
+}
+
+.modal__close {
+}
+
+.modal__heading {
+}
+
+.modal__form {
+}
+
+.modal__button {
+}

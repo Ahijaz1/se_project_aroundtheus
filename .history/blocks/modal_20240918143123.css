@@ -1,0 +1,20 @@
+.modal {
+  position: fixed;
+  top: 0;
+  background-color: antiquewhite;
+}
+
+.modal__container {
+}
+
+.modal__close {
+}
+
+.modal__heading {
+}
+
+.modal__form {
+}
+
+.modal__button {
+}
