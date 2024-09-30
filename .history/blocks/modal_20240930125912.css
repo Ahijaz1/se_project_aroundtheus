@@ -8,7 +8,6 @@
   z-index: 999;
   display: flex;
   padding: 0 19px;
-  display: none;
 }
 
 .modal_opened {
