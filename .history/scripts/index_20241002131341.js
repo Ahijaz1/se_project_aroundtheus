@@ -55,12 +55,8 @@ function closePopop() {
 function getCardElement(cardData) {
   const cardElement = cardTemplate.cloneNode(true);
   const cardImageEL = cardElement.querySelector(".card__image");
-  const cardTitleEl = cardElement.querySelector(".card__description-title");
-
-  cardImageEL.src = cardData.link;
-  cardImageEL.alt = cardData.name;
+  const cardTitleEl = cardElement.querySelector(".card__title");
   cardTitleEl.textContent = cardData.name;
-
   return cardElement;
 }
 
