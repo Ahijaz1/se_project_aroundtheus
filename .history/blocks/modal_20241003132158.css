@@ -102,6 +102,7 @@
   .modal__input {
     width: 238px;
     height: 27px;
+    padding-top: 30px;
     margin: 0;
   }
 

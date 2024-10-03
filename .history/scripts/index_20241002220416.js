@@ -70,7 +70,7 @@ function handleProfileEditSubmit(e) {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
   profileDescription.textContent = profileDescriptionInput.value;
-  closePopup();
+  closePopop();
 }
 
 /* Event Listeners */
@@ -81,7 +81,7 @@ profileEditButton.addEventListener("click", () => {
   profileEditModal.classList.add("modal_opened");
 });
 
-profileCloseButton.addEventListener("click", closePopup);
+profileCloseButton.addEventListener("click", closePopop);
 
 profileEditForm.addEventListener("submit", handleProfileEditSubmit);
 
