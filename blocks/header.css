@@ -1,0 +1,35 @@
+.header {
+  margin-top: 45px;
+  border-bottom: 1px solid rgb(84, 84, 84, 0.7);
+  max-width: 880px;
+  position: relative;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.header__logo {
+  width: 173px;
+  height: 33px;
+  padding-bottom: 41px;
+  padding-top: 45px;
+}
+
+@media screen and (min-width: 321px) and (max-width: 920px) {
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    padding: 28px 167px 32px 6%;
+  }
+}
+
+@media screen and (max-width: 320px) {
+  .header {
+    max-width: 100%;
+  }
+
+  .header__logo {
+    width: 126px;
+    height: 24px;
+    padding: 28px 167px 32px 27px;
+  }
+}

@@ -1,0 +1,129 @@
+.modal {
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  z-index: 999;
+  display: flex;
+  padding: 0 19px;
+  display: none;
+}
+
+.modal_opened {
+  display: flex;
+}
+
+.modal__container {
+  position: relative;
+  background-color: #fff;
+  padding: 34px 36px 36px;
+  border-radius: 8px;
+  margin: auto;
+  box-sizing: border-box;
+  max-width: 730px;
+}
+
+.modal__close {
+  position: absolute;
+  cursor: pointer;
+  top: -45px;
+  right: -45px;
+  height: 40px;
+  width: 40px;
+  border: none;
+  background-image: url("../images/card-images/Close.svg");
+  background-color: transparent;
+  border-color: transparent;
+  background-size: contain;
+}
+
+.modal__heading {
+  color: #000;
+  margin: 0;
+  font-size: 24px;
+  font-weight: bold;
+  line-height: 29.05px;
+}
+
+.modal__form {
+  display: grid;
+  justify-content: center;
+  border: 1px;
+}
+
+.modal__button {
+  color: #fff;
+  font-size: 18px;
+  line-height: 21.78px;
+  align-items: center;
+  background-color: #000;
+  height: 50.15px;
+  border-radius: 2px;
+  width: 358px;
+  margin-top: 48px;
+}
+
+.modal__input {
+  width: 358px;
+  font-weight: 400;
+  font-size: 14px;
+  border: none;
+  height: 27.26px;
+  border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+}
+
+.modal__input:first-of-type {
+  margin-top: 54px;
+}
+
+.modal__input:last-of-type {
+  margin-top: 29.74px;
+}
+
+@media only screen and (max-width: 600px) {
+  .modal__container {
+    padding: 25px 22px;
+    width: 282px;
+    position: relative;
+  }
+
+  .modal__form {
+  }
+
+  .modal__heading {
+    width: 238px;
+    height: 22px;
+    font-size: 18px;
+    line-height: 21.78px;
+  }
+
+  .modal__input {
+    width: 238px;
+    height: 27px;
+    margin: 0;
+  }
+
+  .modal__input:first-of-type {
+    margin-top: 75px;
+  }
+
+  .modal__input:last-of-type {
+    margin-top: 30px;
+  }
+
+  .modal__button {
+    width: 100%;
+    font-size: 14px;
+    line-height: 16.94px;
+    margin-top: 45px;
+  }
+
+  .modal__close {
+    width: 26px;
+    height: 26px;
+    right: 0;
+    top: -40px;
+  }
+}
