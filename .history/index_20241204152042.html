@@ -35,7 +35,10 @@
               Explorer
             </p>
           </div>
-          <button class="profile__add-button" type="button"></button>
+          <button
+            class="profile__add-button"
+            type="button"
+          ></button>
         </section>
         <section class="cards page__section">
           <ul class="cards__list"></ul>
@@ -54,21 +57,22 @@
         <button type="button" class="modal__close"></button>
         <h2 class="modal__heading">Edit Profile</h2>
         <form class="modal__form">
-          <input
-            type="text"
-            placeholder="Jacques Cousteau"
-            name="title"
-            class="modal__input"
-            id="profile-title-input"
-          />
-          <input
-            type="text"
-            placeholder="Explorer"
-            name="description"
-            class="modal__input"
-            id="profile-description-input"
-          />
-          <button class="modal__save-button">Save</button>
+            <input
+              type="text"
+              placeholder="Jacques Cousteau"
+              name="title"
+              class="modal__input"
+              id="profile-title-input"
+            />
+            <input
+              type="text"
+              placeholder="Explorer"
+              name="description"
+              class="modal__input"
+              id="profile-description-input"
+            />
+          </div>
+          <button class="modal__save-button .modal__container">Save</button>
         </form>
       </div>
     </div>
@@ -80,20 +84,20 @@
         <button class="modal__close"></button>
         <p class="modal__heading">New Place</p>
         <form class="modal__form" id="add-card-form">
-          <input
-            type="text"
-            placeholder="Title"
-            name="title"
-            class="modal__input modal__input_type_title"
-            id="card-title-input"
-          />
-          <input
-            type="url"
-            placeholder="Image URL"
-            name="url"
-            class="modal__input modal__input_type_url"
-            id="card-url-input"
-          />
+            <input
+              type="text"
+              placeholder="Title"
+              name="title"
+              class="modal__input modal__input_type_title"
+              id="card-title-input"
+            />
+            <input
+              type="url"
+              placeholder="Image URL"
+              name="url"
+              class="modal__input modal__input_type_url"
+              id="card-url-input"
+            />
           <button class="modal__save-button">Create</button>
         </form>
       </div>
@@ -112,16 +116,19 @@
       </div>
     </div>
 
-    <!--Card Template-->
+          <!--Card Template-->
 
     <template id="card-template">
       <li class="card">
         <img class="card__image" src="" alt="" />
         <div class="card__description">
           <h2 class="card__description-title"></h2>
-          <button class="card__like-button" type="button"></button>
+          <button
+            class="card__like-button"
+            type="button"
+          ></button>
         </div>
-        <button type="button" class="card__delete-button"></button>
+        <button type="button" class=" card__delete-button"></button>
       </li>
     </template>
 
