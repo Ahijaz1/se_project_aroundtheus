@@ -98,6 +98,7 @@
   width: 358px;
   font-weight: 400;
   font-size: 14px;
+  color: rgba(196, 196, 196, 1);
   border: none;
   height: 27.26px;
   border-bottom: 1px solid rgba(0, 0, 0, 0.2);
@@ -158,10 +159,10 @@
     width: 282px;
     height: 322px;
     margin: 123px 16px 123px 22px;
-    padding: 0px 22px 0px;
   }
 
   .modal__container_type_image {
+    margin: 136px 40px 133px;
     width: 240px;
     height: 299px;
   }
@@ -169,7 +170,7 @@
   .modal__description {
     font-size: 12px;
     line-height: 14.52px;
-    margin: 10px 40px 111px 0px;
+    margin: 10px 40px 111px 10px;
   }
 
   .modal__image {
@@ -184,7 +185,6 @@
     height: 22px;
     font-size: 18px;
     line-height: 21.78px;
-    padding-top: 25px;
   }
 
   .modal__input {
@@ -219,7 +219,7 @@
   .modal__close_preview {
     width: 30px;
     height: 30px;
-    top: -33px;
-    right: -56px;
+    top: -35px;
+    right: -35px;
   }
 }
