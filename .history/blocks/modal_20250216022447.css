@@ -128,8 +128,9 @@
   font-size: 12px;
   font-style: normal;
   font-weight: 400;
-  line-height: 14.52px;
-  top: calc(100% - 130px);
+  line-height: 14.5px;
+  position: absolute;
+  top: calc(100% - 135px);
 }
 
 .modal__error_visible:disabled {
@@ -158,14 +159,12 @@
 }
 
 .modal__error {
-  display: block;
-  color: #ff0000;
-  font-family: Inter, Arial, Helvetica, sans-serif;
+  color: red;
   font-size: 12px;
-  font-style: normal;
-  font-weight: 400;
   line-height: 14.52px;
+  display: block;
   top: calc(100% - 195px);
+  position: absolute;
 }
 
 @media only screen and (max-width: 600px) {

@@ -48,7 +48,7 @@
       </footer>
     </div>
 
-    <!-- Edit Modal Form-->
+    <!-- Edit Modal -->
     <div class="modal" id="profile-edit-modal">
       <div class="modal__container">
         <button type="button" class="modal__close"></button>
@@ -64,11 +64,12 @@
             maxlength="40"
             required
           />
-          <span class="modal__error" id="profile-title-error">
+          <span class="popup__error" id="profile-title-error">
+            error message here
           </span>
           <input
             type="text"
-            placeholder="About me"
+            placeholder="Explorer"
             name="description"
             class="modal__input"
             id="profile-description-input"
@@ -76,9 +77,9 @@
             maxlength="200"
             required
           />
-          <span class="modal__error" id="profile-description-error">
+          <span class="popup__error" id="profile-title-error">
 
-          <button class="modal__button modal__save-button">Save</button>
+          <button class="modal__save-button">Save</button>
         </form>
       </div>
     </div>
@@ -96,23 +97,15 @@
             name="title"
             class="modal__input modal__input_type_title"
             id="card-title-input"
-            minlength="1"
-            maxlength="30"
-            required
           />
-          <span class="modal__error" id="card-title-input-error">
-          </span>
           <input
             type="url"
             placeholder="Image link"
             name="url"
             class="modal__input modal__input_type_url"
             id="card-url-input"
-            required
           />
-          <span class="modal__error_visible" id="card-url-input-error"></span>
-
-          <button class="modal__button modal__save-button">Create</button>
+          <button class="modal__save-button">Create</button>
         </form>
       </div>
     </div>
