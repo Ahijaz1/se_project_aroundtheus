@@ -33,6 +33,7 @@
   box-sizing: border-box;
   width: 430px;
   max-height: 75vh;
+  overflow: auto;
   transition: opacity 1s ease-out;
 }
 
@@ -53,8 +54,8 @@
 .modal__close {
   position: absolute;
   cursor: pointer;
-  top: -45px;
-  right: -45px;
+  top: -20px;
+  right: -20px;
   height: 40px;
   width: 40px;
   border: none;

@@ -100,6 +100,11 @@ function closePopup(popup) {
   popup.classList.remove("modal_content");
 }
 
+function openPopup(popup) {
+  popup.classList.add(".modal_content");
+  document.addEventListener("mousedown, handleOverlayClick");
+}
+
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);

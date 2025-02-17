@@ -90,14 +90,18 @@ const previewCloseButton = document.querySelector(
   "#preview-image-modal .modal__close"
 );
 
-/* Functions */
+/// Functions ///
 
 function openPopup(popup) {
-  popup.classList.add("modal_content");
+  popup.classList.add("modal__container");
+  document.addEventListener("mousedown", handleOverlayClick);
+  document.addEventListener("keydown", handleEscapeClose);
 }
 
 function closePopup(popup) {
-  popup.classList.remove("modal_content");
+  popup.classList.remove("modal__container");
+  document.removeEventListenerEventListener("mousedown", handleOverlayClick);
+  document.removeEventListenerEventListener("keydown", handleEscapeClose);
 }
 
 function renderCard(cardData) {

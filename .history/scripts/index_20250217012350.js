@@ -105,6 +105,34 @@ function renderCard(cardData) {
   cardListEl.prepend(cardElement);
 }
 
+function closeOverlay(evt) {
+  const openModal = document.querySelector(".modal_opened");
+  if (evt.target.classList.contains("modal")) {
+    closeModal(openModal);
+  }
+}
+
+function handleEsc(evt) {
+  if (evt.key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    if (openModal) {
+      closeModal(openModal);
+    }
+  }
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_content");
+  modal.addEventListener("click", closeOverlay);
+  document.addEventListener("keydown", handleEsc);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_content");
+  modal.removeEventListener("click", closeOverlay);
+  document.removeEventListener("keydown", handleEsc);
+}
+
 /* Event Handlers */
 
 function handleAddCardFormSubmit(evt) {

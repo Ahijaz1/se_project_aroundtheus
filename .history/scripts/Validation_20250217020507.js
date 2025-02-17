@@ -87,10 +87,7 @@ function enableValidation(options) {
 
 // Close modal on overlay click or close button
 const handleModalClose = (event) => {
-  if (
-    event.target.classList.contains("modal") ||
-    event.target.classList.contains("modal__close")
-  ) {
+  if (event.target.classList.contains("modal")) {
     closePopup(event.currentTarget);
   }
 };

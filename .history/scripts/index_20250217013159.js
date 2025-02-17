@@ -93,16 +93,44 @@ const previewCloseButton = document.querySelector(
 /* Functions */
 
 function openPopup(popup) {
-  popup.classList.add("modal_content");
+  popup.classList.add("modal_opened");
 }
 
 function closePopup(popup) {
-  popup.classList.remove("modal_content");
+  popup.classList.remove("modal_opened");
 }
 
 function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
+}
+
+function closeOverlay(event) {
+  const openModal = document.querySelector(".modal_opened");
+  if (event.target.classList.contains("modal")) {
+    closeModal(openModal);
+  }
+}
+
+function handleEsc(event) {
+  if (event.key === "Escape") {
+    const openModal = document.querySelector(".modal_opened");
+    if (openModal) {
+      closeModal(openModal);
+    }
+  }
+}
+
+function openModal(modal) {
+  modal.classList.add("modal_opened");
+  modal.addEventListener("click", closeOverlay);
+  document.addEventListener("keydown", handleEsc);
+}
+
+function closeModal(modal) {
+  modal.classList.remove("modal_opened");
+  modal.removeEventListener("click", closeOverlay);
+  document.removeEventListener("keydown", handleEsc);
 }
 
 /* Event Handlers */

@@ -16,6 +16,8 @@
 
 .modal_opened {
   display: flex;
+  opacity: 1;
+  visibility: visible;
 }
 
 .modal_content {
@@ -32,7 +34,6 @@
   position: relative;
   box-sizing: border-box;
   width: 430px;
-  max-height: 75vh;
   transition: opacity 1s ease-out;
 }
 

@@ -98,6 +98,12 @@ function openPopup(popup) {
 
 function closePopup(popup) {
   popup.classList.remove("modal_content");
+  document.removeEventListener("mousedown", handleOverlayClick);
+}
+
+function openPopup(popup) {
+  popup.classList.add(".modal_content");
+  document.addEventListener("mousedown, handleOverlayClick");
 }
 
 function renderCard(cardData) {

@@ -9,13 +9,9 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 // Hide input error
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  if (errorMessageEl) {
-    inputEl.classList.remove(inputErrorClass);
-    errorMessageEl.textContent = "";
-    errorMessageEl.classList.remove(errorClass);
-  } else {
-    console.log(`Error element not found for ${inputEl.id}`);
-  }
+  inputEl.classList.remove(inputErrorClass);
+  errorMessageEl.textContent = "";
+  errorMessageEl.classList.remove(errorClass);
 }
 
 // Check input validity

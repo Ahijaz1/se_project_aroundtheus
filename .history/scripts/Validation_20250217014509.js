@@ -1,4 +1,6 @@
-// Show input error
+// enabling validation by calling enableValidation()
+// pass all the settings on call
+
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
   inputEl.classList.add(inputErrorClass);
@@ -6,19 +8,13 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   errorMessageEl.classList.add(errorClass);
 }
 
-// Hide input error
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  if (errorMessageEl) {
-    inputEl.classList.remove(inputErrorClass);
-    errorMessageEl.textContent = "";
-    errorMessageEl.classList.remove(errorClass);
-  } else {
-    console.log(`Error element not found for ${inputEl.id}`);
-  }
+  inputEl.classList.remove(inputErrorClass);
+  errorMessageEl.textContent = "";
+  errorMessageEl.classList.remove(errorClass);
 }
 
-// Check input validity
 function checkInputValidity(formEl, inputEl, options) {
   if (!inputEl.validity.valid) {
     showInputError(formEl, inputEl, options);
@@ -27,91 +23,80 @@ function checkInputValidity(formEl, inputEl, options) {
   }
 }
 
-// Check if form has invalid inputs
 function hasInvalidInput(inputList) {
   return inputList.some((inputEl) => !inputEl.validity.valid);
 }
 
-// Toggle button state
 function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
   if (hasInvalidInput(inputEls)) {
     submitButton.classList.add(inactiveButtonClass);
-    submitButton.disabled = true;
-  } else {
-    submitButton.classList.remove(inactiveButtonClass);
-    submitButton.disabled = false;
+    return (submitButton.disabled = true);
   }
+  submitButton.classList.remove(inactiveButtonClass);
+  submitButton.disabled = false;
 }
 
-// Reset form validation when modal closes
-function resetValidation(formEl, options) {
-  const { inputSelector, submitButtonSelector } = options;
-  const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(submitButtonSelector);
-
-  inputEls.forEach((inputEl) => hideInputError(formEl, inputEl, options));
-  toggleButtonState(inputEls, submitButton, options);
-}
-
-// Close modal and reset form
-function closePopup(modal) {
-  modal.classList.remove("modal_content");
-  const formEl = modal.querySelector("form");
-  if (formEl) {
-    resetValidation(formEl, config);
-  }
-}
-
-// Set event listeners for form validation
 function setEventListeners(formEl, options) {
   const { inputSelector, submitButtonSelector } = options;
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
-
   inputEls.forEach((inputEl) => {
-    inputEl.addEventListener("input", () => {
+    inputEl.addEventListener("input", (e) => {
       checkInputValidity(formEl, inputEl, options);
       toggleButtonState(inputEls, submitButton, options);
     });
   });
 }
 
-// Enable validation for forms
 function enableValidation(options) {
   const formEls = [...document.querySelectorAll(options.formSelector)];
   formEls.forEach((formEl) => {
-    formEl.addEventListener("submit", (e) => e.preventDefault());
+    formEl.addEventListener("submit", (e) => {
+      e.preventDefault();
+    });
+
     setEventListeners(formEl, options);
+    //look for all inputs inside of form
+    //loop though all the imputs to see of all are valid
+    // if input is not valid
+    // get validation message
+    // add error class to input
+    // display error message
+    // disable button
+    // if all inputs are valid
+    // enable button
+    // reset error messages
   });
 }
 
-// Close modal on overlay click or close button
+const modals = document.querySelectorAll(".modal");
+
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+}
+
 const handleModalClose = (event) => {
   if (
     event.target.classList.contains("modal") ||
     event.target.classList.contains("modal__close")
   ) {
-    closePopup(event.currentTarget);
+    closePopup(event.currentTarget.closest(".modal"));
   }
 };
 
-// Add event listeners to modals
-const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
   modal.addEventListener("mousedown", handleModalClose);
 });
 
-// Close modal on Escape key press
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    const openModal = document.querySelector(".modal_content");
+    const openModal = document.querySelector(".modal_opened");
     if (openModal) {
       closePopup(openModal);
     }
   }
 });
 
-// Validation configuration
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
@@ -121,5 +106,4 @@ const config = {
   errorClass: "modal__error_visible",
 };
 
-// Initialize validation
 enableValidation(config);

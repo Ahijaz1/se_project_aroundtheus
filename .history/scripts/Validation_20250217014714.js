@@ -9,13 +9,9 @@ function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
 // Hide input error
 function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
-  if (errorMessageEl) {
-    inputEl.classList.remove(inputErrorClass);
-    errorMessageEl.textContent = "";
-    errorMessageEl.classList.remove(errorClass);
-  } else {
-    console.log(`Error element not found for ${inputEl.id}`);
-  }
+  inputEl.classList.remove(inputErrorClass);
+  errorMessageEl.textContent = "";
+  errorMessageEl.classList.remove(errorClass);
 }
 
 // Check input validity
@@ -55,7 +51,7 @@ function resetValidation(formEl, options) {
 
 // Close modal and reset form
 function closePopup(modal) {
-  modal.classList.remove("modal_content");
+  modal.classList.remove("modal_opened");
   const formEl = modal.querySelector("form");
   if (formEl) {
     resetValidation(formEl, config);
@@ -104,7 +100,7 @@ modals.forEach((modal) => {
 // Close modal on Escape key press
 document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
-    const openModal = document.querySelector(".modal_content");
+    const openModal = document.querySelector(".modal_opened");
     if (openModal) {
       closePopup(openModal);
     }
