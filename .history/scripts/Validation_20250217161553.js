@@ -59,12 +59,12 @@ function setEventListeners(formEl, options) {
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
 
-  // Disable the button when initializing
-  toggleButtonState(inputEls, submitButton, options);
+  // here you disable the button when you start the project
+  toggleButtonState(inputList, buttonElement, options);
 
-  // Add the `reset` handler
-  formEl.addEventListener("reset", () => {
-    disableButton(submitButton, options);
+  // here you add the `reset` handler
+  formElement.addEventListener("reset", () => {
+    disableButton(buttonElement, options);
   });
 
   inputEls.forEach((inputEl) => {

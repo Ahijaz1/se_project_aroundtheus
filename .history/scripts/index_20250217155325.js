@@ -128,6 +128,12 @@ profileModalCloseButton.addEventListener("click", () => {
   closePopup(profileEditModal);
 });
 
+// Close modal and reset form
+function closePopup(modal) {
+  modal.classList.remove("modal_content");
+  const formEl = modal.querySelector("form");
+}
+
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;

@@ -135,6 +135,12 @@ profileEditForm.addEventListener("submit", (e) => {
   closePopup(profileEditModal);
 });
 
+// Close modal and reset form
+function closePopup(modal) {
+  modal.classList.remove("modal_content");
+  const formEl = modal.querySelector("form");
+}
+
 /* New Card */
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);

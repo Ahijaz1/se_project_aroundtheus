@@ -105,6 +105,12 @@ function renderCard(cardData) {
   cardListEl.prepend(cardElement);
 }
 
+// Close modal and reset form
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  const formEl = modal.querySelector("form");
+}
+
 /* Event Handlers */
 
 function handleAddCardFormSubmit(evt) {

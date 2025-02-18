@@ -59,14 +59,6 @@ function setEventListeners(formEl, options) {
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
 
-  // Disable the button when initializing
-  toggleButtonState(inputEls, submitButton, options);
-
-  // Add the `reset` handler
-  formEl.addEventListener("reset", () => {
-    disableButton(submitButton, options);
-  });
-
   inputEls.forEach((inputEl) => {
     inputEl.addEventListener("input", () => {
       checkInputValidity(formEl, inputEl, options);
@@ -101,24 +93,14 @@ modals.forEach((modal) => {
 });
 
 // Close modal on Escape key press
-function handleEscape(event) {
+document.addEventListener("keydown", (event) => {
   if (event.key === "Escape") {
     const openModal = document.querySelector(".modal_opened");
     if (openModal) {
       closePopup(openModal);
     }
   }
-}
-
-function openPopup(modal) {
-  modal.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscape);
-}
-
-function closePopup(modal) {
-  modal.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscape);
-}
+});
 
 // Validation configuration
 const config = {

@@ -21,6 +21,12 @@
   transition: visibility 0s, opacity 0.3s ease-in-out;
 }
 
+.modal_content {
+  visibility: visible;
+  opacity: 1;
+  transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
 .modal__container {
   margin: auto;
   background: #fff;

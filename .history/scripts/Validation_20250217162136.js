@@ -54,17 +54,24 @@ function resetValidation(formEl, options) {
 }
 
 // Set event listeners for form validation
-function setEventListeners(formEl, options) {
-  const { inputSelector, submitButtonSelector } = options;
-  const inputEls = [...formEl.querySelectorAll(inputSelector)];
-  const submitButton = formEl.querySelector(submitButtonSelector);
+function setEventListeners(formElement, config) {
+  const inputList = Array.from(formElement.querySelectorAll(config.inputSelector)); // Ensure inputList is defined
+  const submitButton = formElement.querySelector(config.submitButtonSelector);
 
-  // Disable the button when initializing
-  toggleButtonState(inputEls, submitButton, options);
+  inputList.forEach((inputElement) => {
+    inputElement.addEventListener("input", () => {
+      checkInputValidity(formElement, inputElement, config);
+      toggleButtonState(inputList, submitButton, config);
+    });
+  });
 
-  // Add the `reset` handler
-  formEl.addEventListener("reset", () => {
-    disableButton(submitButton, options);
+  toggleButtonState(inputList, submitButton, config); // Ensure button state updates on load
+}
+
+
+  // here you add the `reset` handler
+  formElement.addEventListener("reset", () => {
+    disableButton(buttonElement, options);
   });
 
   inputEls.forEach((inputEl) => {

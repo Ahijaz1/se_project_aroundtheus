@@ -15,10 +15,13 @@
 }
 
 .modal_opened {
-  display: flex;
   visibility: visible;
   opacity: 1;
   transition: visibility 0s, opacity 0.3s ease-in-out;
+}
+
+.modal_content {
+  display: flex;
 }
 
 .modal__container {

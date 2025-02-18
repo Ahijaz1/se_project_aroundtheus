@@ -141,6 +141,8 @@ addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
 
+addModalCloseButton.addEventListener("click", () => closePopup(addCardModal));
+
 previewCloseButton.addEventListener("click", () => {
   closePopup(previewImageModal);
 });
