@@ -1,9 +1,16 @@
 // Show input error
 function showInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
   const errorMessageEl = formEl.querySelector(`#${inputEl.id}-error`);
+
+  if (!errorMessageEl) {
+    console.warn(`Error element not found for ${inputEl.id}`);
+    return;
+  }
+
   inputEl.classList.add(inputErrorClass);
   errorMessageEl.textContent = inputEl.validationMessage;
   errorMessageEl.classList.add(errorClass);
+  errorMessageEl.style.visibility = "visible";
 }
 
 // Hide input error
@@ -13,6 +20,7 @@ function hideInputError(formEl, inputEl, { inputErrorClass, errorClass }) {
     inputEl.classList.remove(inputErrorClass);
     errorMessageEl.textContent = "";
     errorMessageEl.classList.remove(errorClass);
+    errorMessageEl.style.visibility = "hidden";
   } else {
     console.log(`Error element not found for ${inputEl.id}`);
   }

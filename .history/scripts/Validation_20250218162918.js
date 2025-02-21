@@ -59,11 +59,6 @@ function setEventListeners(formEl, options) {
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
 
-  if (!submitButton) {
-    console.error("setEventListeners: submitButton not found in", formEl);
-    return;
-  }
-
   // Disable the button when initializing
   toggleButtonState(inputEls, submitButton, options);
 
@@ -87,17 +82,6 @@ function enableValidation(options) {
     formEl.addEventListener("submit", (e) => e.preventDefault());
     setEventListeners(formEl, options);
   });
-}
-
-// Modal handling logic
-function openPopup(popup) {
-  popup.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscape);
-}
-
-function closePopup(popup) {
-  popup.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscape);
 }
 
 // Close modal on overlay click or close button

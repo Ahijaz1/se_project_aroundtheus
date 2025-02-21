@@ -59,11 +59,6 @@ function setEventListeners(formEl, options) {
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
 
-  if (!submitButton) {
-    console.error("setEventListeners: submitButton not found in", formEl);
-    return;
-  }
-
   // Disable the button when initializing
   toggleButtonState(inputEls, submitButton, options);
 

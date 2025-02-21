@@ -114,6 +114,7 @@ function handleAddCardFormSubmit(evt) {
   renderCard({ name, link }, cardListEl);
   closePopup(addCardModal);
   evt.target.reset();
+  resetValidation(addCardFormElement, config); // Reset validation state
 }
 
 // Event Listeners

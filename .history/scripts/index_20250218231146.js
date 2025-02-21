@@ -105,6 +105,21 @@ function renderCard(cardData) {
   cardListEl.prepend(cardElement);
 }
 
+function adjustModalSize() {
+  const modalContainer = document.querySelector(".modal__container_type_image");
+  const modalImage = document.querySelector(".modal__image");
+
+  if (modalContainer && modalImage) {
+    modalImage.style.maxHeight = `${window.innerHeight * 0.8}px`;
+  }
+}
+
+// Run this function whenever the modal opens
+document
+  .querySelector("#preview-image-modal")
+  .addEventListener("transitionend", adjustModalSize);
+window.addEventListener("resize", adjustModalSize);
+
 // Event Handlers
 
 function handleAddCardFormSubmit(evt) {

@@ -175,8 +175,8 @@
   .modal__container {
     width: 282px;
     margin: 123px 16px 123px 22px;
-    padding: 0px 22px;
-    bottom: 285px;
+    padding: 0px 22px 22px 22px;
+    bottom: 75px;
   }
 
   .modal__container_type_image {

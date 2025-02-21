@@ -59,13 +59,21 @@ function setEventListeners(formEl, options) {
   const inputEls = [...formEl.querySelectorAll(inputSelector)];
   const submitButton = formEl.querySelector(submitButtonSelector);
 
-  if (!submitButton) {
-    console.error("setEventListeners: submitButton not found in", formEl);
-    return;
-  }
-
   // Disable the button when initializing
-  toggleButtonState(inputEls, submitButton, options);
+  function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
+    if (!submitButton) {
+      console.error("toggleButtonState: submitButton not found");
+      return;
+    }
+
+    if (hasInvalidInput(inputEls)) {
+      submitButton.classList.add(inactiveButtonClass);
+      submitButton.disabled = true;
+    } else {
+      submitButton.classList.remove(inactiveButtonClass);
+      submitButton.disabled = false;
+    }
+  }
 
   // Add the `reset` handler
   formEl.addEventListener("reset", () => {
@@ -89,17 +97,6 @@ function enableValidation(options) {
   });
 }
 
-// Modal handling logic
-function openPopup(popup) {
-  popup.classList.add("modal_opened");
-  document.addEventListener("keydown", handleEscape);
-}
-
-function closePopup(popup) {
-  popup.classList.remove("modal_opened");
-  document.removeEventListener("keydown", handleEscape);
-}
-
 // Close modal on overlay click or close button
 const handleModalClose = (event) => {
   if (
@@ -109,6 +106,12 @@ const handleModalClose = (event) => {
     closePopup(event.currentTarget);
   }
 };
+
+// Add event listeners to modals
+const modals = document.querySelectorAll(".modal");
+modals.forEach((modal) => {
+  modal.addEventListener("mousedown", handleModalClose);
+});
 
 // Close modal on Escape key press
 function handleEscape(event) {
@@ -120,17 +123,21 @@ function handleEscape(event) {
   }
 }
 
-// Modal event listeners
-const modals = document.querySelectorAll(".modal");
-modals.forEach((modal) => {
-  modal.addEventListener("mousedown", handleModalClose);
-});
+function openPopup(modal) {
+  modal.classList.add("modal_opened");
+  document.addEventListener("keydown", handleEscape);
+}
+
+function closePopup(modal) {
+  modal.classList.remove("modal_opened");
+  document.removeEventListener("keydown", handleEscape);
+}
 
 // Validation configuration
 const config = {
   formSelector: ".modal__form",
   inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
+  submitButtonSelector: ".modal__button",
   inactiveButtonClass: "modal__button_disabled",
   inputErrorClass: "modal__input_type_error",
   errorClass: "modal__error_visible",

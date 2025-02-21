@@ -53,7 +53,7 @@
       <div class="modal__container">
         <button type="button" class="modal__close"></button>
         <h2 class="modal__heading">Edit Profile</h2>
-        <form class="modal__form">
+        <form class="modal__form modal__save-button">
           <input
             type="text"
             placeholder="Name"
@@ -64,11 +64,7 @@
             maxlength="40"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="profile-title-input-error"
-          >
-          </span>
+          <span class="modal__error" id="profile-title-input-error"> </span>
           <input
             type="text"
             placeholder="About me"
@@ -80,7 +76,7 @@
             required
           />
           <span
-            class="modal__error_visible"
+            class="modal__error"
             id="profile-description-input-error"
           ></span>
 
@@ -95,7 +91,7 @@
       <div class="modal__container">
         <button type="button" class="modal__close"></button>
         <p class="modal__heading">New Place</p>
-        <form class="modal__form" id="add-card-form">
+        <form class="modal__form modal__save-button" id="add-card-form">
           <input
             type="text"
             placeholder="Title"
@@ -115,9 +111,12 @@
             id="card-url-input"
             required
           />
-          <span class="modal__error_visible" id="card-url-input-error"></span>
+          <span
+            class="modal__error modal__error_visible"
+            id="card-url-input-error"
+          ></span>
 
-          <button class="modal__button modal__save-button">Create</button>
+          <button class="modal__save-button">Create</button>
         </form>
       </div>
     </div>
@@ -125,7 +124,7 @@
     <!--Preview Modal-->
 
     <div class="modal" id="preview-image-modal">
-      <div class="modal__container_type_image">
+      <div class="modal__container modal__container_type_image">
         <button
           class="modal__close modal__close_preview"
           id="preview-close"
