@@ -183,6 +183,10 @@
     position: relative;
   }
 
+  .modal__container-image {
+    max-width: 280px;
+  }
+
   .modal__description {
     font-size: 12px;
     line-height: 14.52px;

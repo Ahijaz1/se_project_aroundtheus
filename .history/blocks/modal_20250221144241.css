@@ -178,9 +178,9 @@
     padding: 0px 22px;
   }
 
-  .modal__container_type_image {
+  .modal__container_image {
     height: 299px;
-    position: relative;
+    max-width: 280px;
   }
 
   .modal__description {

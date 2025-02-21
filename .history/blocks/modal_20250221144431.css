@@ -180,7 +180,10 @@
 
   .modal__container_type_image {
     height: 299px;
-    position: relative;
+  }
+
+  .modal__container-image {
+    max-width: 280px;
   }
 
   .modal__description {

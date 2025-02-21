@@ -44,7 +44,11 @@ function toggleButtonState(inputEls, submitButton, { inactiveButtonClass }) {
 }
 
 // Reset form validation when modal closes
-function resetValidation(formEl, inputEls, submitButton, options) {
+function resetValidation(formEl, options) {
+  const { inputSelector, submitButtonSelector } = options;
+  const inputEls = [...formEl.querySelectorAll(inputSelector)];
+  const submitButton = formEl.querySelector(submitButtonSelector);
+
   inputEls.forEach((inputEl) => hideInputError(formEl, inputEl, options));
   toggleButtonState(inputEls, submitButton, options);
 }
@@ -65,7 +69,7 @@ function setEventListeners(formEl, options) {
 
   // Add the `reset` handler
   formEl.addEventListener("reset", () => {
-    resetValidation(formEl, inputEls, submitButton, options);
+    resetValidation(submitButton, options);
   });
 
   inputEls.forEach((inputEl) => {

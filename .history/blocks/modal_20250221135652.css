@@ -179,8 +179,9 @@
   }
 
   .modal__container_type_image {
+    width: 240px;
     height: 299px;
-    position: relative;
+    max-width: 280px;
   }
 
   .modal__description {
@@ -242,14 +243,14 @@
     width: 26px;
     height: 26px;
     right: 0px;
-    top: -50px;
+    top: -40px;
   }
 
   .modal__close_preview {
     width: 26px;
     height: 26px;
-    right: -10px;
-    top: 30px;
+    right: 0px;
+    top: -40px;
   }
 
   .modal__error {
