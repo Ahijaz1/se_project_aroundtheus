@@ -251,8 +251,8 @@
   .modal__close_preview {
     width: 26px;
     height: 26px;
-    right: 0px;
-    top: 0px;
+    right: -10px;
+    top: 30px;
   }
 
   .modal__error {

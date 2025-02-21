@@ -181,7 +181,7 @@
   .modal__container_type_image {
     height: 299px;
     position: relative;
-    max-width: unset;
+    max-width: unset;,
     margin: unset;
     padding: unset;
   }
@@ -251,8 +251,8 @@
   .modal__close_preview {
     width: 26px;
     height: 26px;
-    right: 0px;
-    top: 0px;
+    right: -10px;
+    top: 30px;
   }
 
   .modal__error {
