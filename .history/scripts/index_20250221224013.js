@@ -131,7 +131,7 @@ function handleEscape(event) {
 // Modal event listeners
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
-  modal.addEventListener("click", handleModalClose);
+  modal.addEventListener("mousedown", handleModalClose);
 });
 
 // Event Handlers
@@ -153,6 +153,10 @@ profileEditButton.addEventListener("click", () => {
   openPopup(profileEditModal);
 });
 
+profileModalCloseButton.addEventListener("click", () => {
+  closePopup(profileEditModal);
+});
+
 profileEditForm.addEventListener("submit", (e) => {
   e.preventDefault();
   profileTitle.textContent = profileTitleInput.value;
@@ -165,6 +169,10 @@ profileEditForm.addEventListener("submit", (e) => {
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
 addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
+
+previewCloseButton.addEventListener("click", () => {
+  closePopup(previewImageModal);
+});
 
 // Initial card rendering
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));

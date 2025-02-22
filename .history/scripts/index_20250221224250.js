@@ -131,7 +131,7 @@ function handleEscape(event) {
 // Modal event listeners
 const modals = document.querySelectorAll(".modal");
 modals.forEach((modal) => {
-  modal.addEventListener("click", handleModalClose);
+  modal.addEventListener("mousedown", handleModalClose);
 });
 
 // Event Handlers
@@ -147,24 +147,12 @@ function handleAddCardFormSubmit(evt) {
 
 // Event Listeners
 
-profileEditButton.addEventListener("click", () => {
-  profileTitleInput.value = profileTitle.textContent;
-  profileDescriptionInput.value = profileDescription.textContent;
-  openPopup(profileEditModal);
-});
-
-profileEditForm.addEventListener("submit", (e) => {
-  e.preventDefault();
-  profileTitle.textContent = profileTitleInput.value;
-  profileDescription.textContent = profileDescriptionInput.value;
+profileModalCloseButton.addEventListener("click", () => {
   closePopup(profileEditModal);
 });
 
 // New Card
 
-addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
-
-addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
-
-// Initial card rendering
-initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
+previewCloseButton.addEventListener("click", () => {
+  closePopup(previewImageModal);
+});

@@ -164,7 +164,5 @@ profileEditForm.addEventListener("submit", (e) => {
 
 addCardFormElement.addEventListener("submit", handleAddCardFormSubmit);
 
-addNewCardButton.addEventListener("click", () => openPopup(addCardModal));
-
 // Initial card rendering
 initialCards.forEach((cardData) => renderCard(cardData, cardListEl));
