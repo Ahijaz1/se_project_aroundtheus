@@ -67,9 +67,9 @@ const previewCloseButton = document.querySelector(
 );
 
 function handleImageClick(name, link) {
-  previewCardImage.src = link;
-  previewCardImage.alt = name;
-  previewDescription.textContent = name;
+  previewImageModal.src = link;
+  previewImageModal.alt = name;
+  previewDescription.textContent = cardData.name;
   openPopup(previewImageModal);
 }
 

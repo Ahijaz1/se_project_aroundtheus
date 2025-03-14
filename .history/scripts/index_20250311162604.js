@@ -1,5 +1,4 @@
-import Card from "./Card.js";
-import FormValidator from "./FormValidator.js";
+import FormValidator from "./FormValidator";
 
 const initialCards = [
   {
@@ -66,36 +65,36 @@ const previewCloseButton = document.querySelector(
   "#preview-image-modal .modal__close"
 );
 
-function handleImageClick(name, link) {
-  previewCardImage.src = link;
-  previewCardImage.alt = name;
-  previewDescription.textContent = name;
-  openPopup(previewImageModal);
-}
+/* Functions for rendering cards */
 
 function getCardElement(cardData) {
-  return new Card(cardData, "#card-template", handleImageClick).getView();
+  const cardElement = cardTemplate.cloneNode(true);
+  const cardImageEL = cardElement.querySelector(".card__image");
+  const cardTitleEl = cardElement.querySelector(".card__description-title");
+  const likeButton = cardElement.querySelector(".card__like-button");
+  const cardDelete = cardElement.querySelector(".card__delete-button");
+
+  cardDelete.addEventListener("click", () => cardElement.remove());
+
+  likeButton.addEventListener("click", () => {
+    likeButton.classList.toggle("card__like-button_active");
+  });
+
+  cardTitleEl.textContent = cardData.name;
+  cardImageEL.src = cardData.link;
+  cardImageEL.alt = cardData.name;
+
+  cardImageEL.addEventListener("click", () => {
+    openPopup(previewImageModal);
+    previewCardImage.src = cardData.link;
+    previewCardImage.alt = cardData.name;
+    previewDescription.textContent = cardData.name;
+  });
+
+  return cardElement;
 }
 
-/* Validaton */
-const validationSettings = {
-  inputSelector: ".modal__input",
-  submitButtonSelector: ".modal__save-button",
-  inactiveButtonClass: "modal__button_disabled",
-  inputErrorClass: "modal__input_type_error",
-  errorClass: "modal__error_visible",
-};
-
-const addFormValidator = new FormValidator(validationSettings, addCardModal);
-addFormValidator.enableValidation();
-
-const editFormValidator = new FormValidator(
-  validationSettings,
-  profileEditForm
-);
-editFormValidator.enableValidation();
-
-function renderCard(cardData, cardListEl) {
+function renderCard(cardData) {
   const cardElement = getCardElement(cardData);
   cardListEl.prepend(cardElement);
 }
@@ -141,11 +140,9 @@ modals.forEach((modal) => {
 
 function handleAddCardFormSubmit(evt) {
   evt.preventDefault();
-  const newCard = {
-    name: cardTitleInput.value,
-    link: cardUrlInput.value,
-  };
-  renderCard(newCard, cardListEl);
+  const name = cardTitleInput.value;
+  const link = cardUrlInput.value;
+  renderCard({ name, link }, cardListEl);
   closePopup(addCardModal);
   evt.target.reset();
 }
