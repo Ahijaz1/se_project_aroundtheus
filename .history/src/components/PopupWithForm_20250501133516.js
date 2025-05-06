@@ -17,8 +17,10 @@ export default class PopupWithForm extends Popup {
   }
 
   setInputValues(data) {
+    // Find all inputs in the form
+    const inputs = this._inputList(".popup__input");
     // Loop through inputs and set their values
-    this._inputList.forEach((input) => {
+    inputs.forEach((input) => {
       // The input name attribute should match the data object key
       const inputName = input.name;
       // Set the input value if we have matching data
@@ -30,8 +32,8 @@ export default class PopupWithForm extends Popup {
 
   setEventListeners() {
     super.setEventListeners();
-    this._form.addEventListener("submit", (evt) => {
-      evt.preventDefault();
+    this._form.addEventListener("submit", (event) => {
+      event.preventDefault();
       this._handleFormSubmit(this._getInputValues());
       this.close();
     });

@@ -35,9 +35,9 @@ const editFormValidator = new FormValidator(
 );
 editFormValidator.enableValidation();
 
-function handleCardCreate(cardData) {
-  const card = createCard(cardData);
-  cardSection.addItem(card);
+function renderCard(cardData, cardListEl) {
+  const cardElement = createCard(cardData);
+  cardListEl.prepend(cardElement);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -53,10 +53,11 @@ addNewCardButton.addEventListener("click", () => {
 // Create new card popup for adding cards
 
 const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
-  handleCardCreate({
+  const card = createCard({
     name: inputValues.title,
     link: inputValues.url,
   });
+  cardSection.addItem(card);
   addCardFormValidator.disableButton();
   newCardPopup.close();
 });
@@ -102,7 +103,10 @@ imagePopup.setEventListeners();
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (data) => handleCardCreate(data),
+    renderer: (data) => {
+      const card = createCard(data);
+      cardSection.addItem(card);
+    },
   },
   ".cards__list"
 );

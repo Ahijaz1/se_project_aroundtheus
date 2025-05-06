@@ -13,7 +13,6 @@ const profileEditModal = document.querySelector("#profile-edit-modal");
 const profileTitle = document.querySelector(".profile__title");
 const profileDescription = document.querySelector(".profile__description");
 const profileTitleInput = document.querySelector("#profile-title-input");
-const form = profileEditModal.querySelector(".modal__form");
 const profileDescriptionInput = form.elements.description;
 
 const addCardModal = document.querySelector("#add-card-modal");
@@ -35,9 +34,9 @@ const editFormValidator = new FormValidator(
 );
 editFormValidator.enableValidation();
 
-function handleCardCreate(cardData) {
-  const card = createCard(cardData);
-  cardSection.addItem(card);
+function renderCard(cardData, cardListEl) {
+  const cardElement = createCard(cardData);
+  cardListEl.prepend(cardElement);
 }
 
 profileEditButton.addEventListener("click", () => {
@@ -53,10 +52,11 @@ addNewCardButton.addEventListener("click", () => {
 // Create new card popup for adding cards
 
 const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
-  handleCardCreate({
+  const card = createCard({
     name: inputValues.title,
     link: inputValues.url,
   });
+  cardSection.addItem(card);
   addCardFormValidator.disableButton();
   newCardPopup.close();
 });
@@ -102,7 +102,10 @@ imagePopup.setEventListeners();
 const cardSection = new Section(
   {
     items: initialCards,
-    renderer: (data) => handleCardCreate(data),
+    renderer: (data) => {
+      const card = createCard(data);
+      cardSection.addItem(card);
+    },
   },
   ".cards__list"
 );

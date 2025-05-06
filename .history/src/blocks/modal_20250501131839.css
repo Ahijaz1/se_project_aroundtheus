@@ -140,7 +140,7 @@
   z-index: -1;
 }
 
-.modal__save-button_disabled {
+.modal__button_disabled {
   background-color: #ffffff;
   color: #000;
   opacity: 20%;
