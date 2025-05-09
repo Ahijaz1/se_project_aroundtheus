@@ -10,6 +10,7 @@
   height: 282px;
   object-fit: cover;
   transition: 0.2s, ease-in;
+  cursor: pointer;
 }
 
 .card__image:hover {

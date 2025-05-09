@@ -41,7 +41,8 @@ function handleCardCreate(cardData) {
 }
 
 profileEditButton.addEventListener("click", () => {
-  editFormValidator.resetValidation();
+  editButton.addEventListener('click', () => {
+    editFormValidator.resetValidation();
   const userData = userInfo.getUserInfo();
   profileEditPopup.setInputValues(userData);
   profileEditPopup.open();
@@ -75,7 +76,6 @@ const profileEditPopup = new PopupWithForm(
       name: inputValues.title,
       description: inputValues.description,
     });
-    profileEditPopup.close();
   }
 );
 

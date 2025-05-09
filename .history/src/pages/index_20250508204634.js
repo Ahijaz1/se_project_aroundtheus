@@ -75,7 +75,6 @@ const profileEditPopup = new PopupWithForm(
       name: inputValues.title,
       description: inputValues.description,
     });
-    profileEditPopup.close();
   }
 );
 
