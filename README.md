@@ -1,3 +1,7 @@
+# Project 9: Around the U.S
+
+Coming Soon!
+
 # Project 8: Around the U.S
 
 Ive successfully worked through creating more classes and combining them together, I set up a project bundling and building with Webpack. Also implemented the setInputValues method for my popup form. My project structure looks cleaner and will be easier to find things. A great challenge but we go through it.
