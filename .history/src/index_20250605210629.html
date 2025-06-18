@@ -100,29 +100,23 @@
           <input
             type="text"
             placeholder="Title"
-            name="title"
+            name="name"
             class="modal__input modal__input_type_title"
             id="card-title-input"
             minlength="1"
             maxlength="30"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="card-title-input-error"
-          ></span>
           <input
             type="url"
             placeholder="Image link"
-            name="url"
+            name="link"
             class="modal__input modal__input_type_url"
             id="card-url-input"
             required
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="card-url-input-error"
-          ></span>
+          <span id="card-title-input-error" class="modal__error"></span>
+
           <button class="modal__button modal__save-button">Create</button>
         </form>
       </div>
@@ -153,12 +147,12 @@
             type="button"
             aria-label="Like"
           ></button>
+          <button
+            class="card__delete-button"
+            type="button"
+            aria-label="Delete"
+          ></button>
         </div>
-        <button
-          class="card__delete-button"
-          type="button"
-          aria-label="Delete"
-        ></button>
       </li>
     </template>
 

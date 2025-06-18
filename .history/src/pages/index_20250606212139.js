@@ -30,28 +30,31 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+const cardSections = "#card-template";
+
+// 1. Define cardSection properly before using it
+cardSection = new Section(
+  {
+    renderer: (cardData) => {
+      const card = createCard(cardData);
+      cardSection.addItem(card.getView());
+    },
+  },
+  ".cards__list" // Make sure this matches your HTML container for cards
+);
+
+// 2. Then fetch and render data
+api
+  .getAppInfo()
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
+
     userInfo.setAvatar(userData.avatar);
 
-    cardSection = new Section(
-      {
-        items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
-
-          cardSection.addItem(card.getView());
-        },
-      },
-      ".cards__list"
-    );
-
-    cardSection.renderItems();
+    cardSection.renderItems(cards); // Now cardSection is defined
   })
   .catch((err) => console.error("Error in getAppInfo:", err));
 

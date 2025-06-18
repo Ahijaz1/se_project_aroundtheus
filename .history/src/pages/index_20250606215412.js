@@ -37,6 +37,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
       name: userData.name,
       description: userData.about,
     });
+
     userInfo.setAvatar(userData.avatar);
 
     cardSection = new Section(
@@ -45,7 +46,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         renderer: (item) => {
           const card = createCard(item);
 
-          cardSection.addItem(card.getView());
+          cardSection.addItem(card);
         },
       },
       ".cards__list"
@@ -53,7 +54,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     cardSection.renderItems();
   })
-  .catch((err) => console.error("Error in getAppInfo:", err));
+  .catch((err) => console.error("Error in Promise.all:", err));
 
 // DOM Elements //
 const profileEditButton = document.querySelector("#profile-edit-button");

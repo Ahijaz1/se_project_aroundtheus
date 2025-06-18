@@ -30,7 +30,7 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
+api;
 Promise.all([api.getUserInfo(), api.getInitialCards()])
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
@@ -39,12 +39,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     });
     userInfo.setAvatar(userData.avatar);
 
-    cardSection = new Section(
+    const cardSection = new Section(
       {
         items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
-
+        renderer: (cardData) => {
+          const card = createCard(cardData);
           cardSection.addItem(card.getView());
         },
       },

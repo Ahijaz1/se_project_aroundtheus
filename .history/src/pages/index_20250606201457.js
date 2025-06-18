@@ -30,28 +30,20 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+const cardSelector = "#card-template";
+let cardSection = null;
+
+api
+  .getAppInfo()
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
-    userInfo.setAvatar(userData.avatar);
 
-    cardSection = new Section(
-      {
-        items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
+    userInfo.setAvatar(userData.avatar); // ✅ Correct usage
 
-          cardSection.addItem(card.getView());
-        },
-      },
-      ".cards__list"
-    );
-
-    cardSection.renderItems();
+    cardSection.renderItems(cards);
   })
   .catch((err) => console.error("Error in getAppInfo:", err));
 

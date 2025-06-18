@@ -44,7 +44,6 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
         items: cards,
         renderer: (item) => {
           const card = createCard(item);
-
           cardSection.addItem(card.getView());
         },
       },

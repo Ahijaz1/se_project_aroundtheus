@@ -79,6 +79,9 @@
   cursor: pointer;
 }
 
+.card__info {
+}
+
 .card__name {
   font-size: 24px;
   line-height: 29.05px;

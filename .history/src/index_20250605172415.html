@@ -100,25 +100,33 @@
           <input
             type="text"
             placeholder="Title"
-            name="title"
-            class="modal__input modal__input_type_title"
-            id="card-title-input"
-            minlength="1"
-            maxlength="30"
-            required
+            name="name"
+            <!--
+            ✅
+            Changed
+            from
+            title
+            to
+            name
+            --
           />
-          <span
-            class="modal__error modal__error_visible"
-            id="card-title-input-error"
-          ></span>
+          class="modal__input modal__input_type_title" id="card-title-input"
+          minlength="1" maxlength="30" required /> ...
           <input
             type="url"
             placeholder="Image link"
-            name="url"
-            class="modal__input modal__input_type_url"
-            id="card-url-input"
-            required
+            name="link"
+            <!--
+            ✅
+            Changed
+            from
+            url
+            to
+            link
+            --
           />
+          class="modal__input modal__input_type_url" id="card-url-input"
+          required />
           <span
             class="modal__error modal__error_visible"
             id="card-url-input-error"
@@ -153,12 +161,12 @@
             type="button"
             aria-label="Like"
           ></button>
+          <button
+            class="card__delete-button"
+            type="button"
+            aria-label="Delete"
+          ></button>
         </div>
-        <button
-          class="card__delete-button"
-          type="button"
-          aria-label="Delete"
-        ></button>
       </li>
     </template>
 

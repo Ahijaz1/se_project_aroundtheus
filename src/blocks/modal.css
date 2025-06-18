@@ -164,6 +164,7 @@
   min-height: 30px;
 }
 
+/*
 .modal__container_delete-confirmation {
   height: 181px;
   margin-top: 270px;
@@ -178,6 +179,7 @@
   color: #fff;
   opacity: 0.3;
 }
+*/
 
 @media only screen and (max-width: 600px) {
   .modal__container {

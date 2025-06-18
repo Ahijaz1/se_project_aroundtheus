@@ -30,21 +30,20 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userData, cards]) => {
+api
+  .getAppInfo()
+  .then((data) => {
     userInfo.setUserInfo({
-      name: userData.name,
-      description: userData.about,
+      name: data.name,
+      description: data.about,
     });
-    userInfo.setAvatar(userData.avatar);
+    userInfo.setAvatar(data.avatar);
 
-    cardSection = new Section(
+    const cardSection = new Section(
       {
         items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
-
+        renderer: (cardData) => {
+          const card = createCard(cardData);
           cardSection.addItem(card.getView());
         },
       },

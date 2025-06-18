@@ -1,6 +1,6 @@
 export default class Card {
   constructor(
-    { name, link, _id, id, isLiked },
+    { name, link, _id, data, isLiked },
     cardSelector,
     handleImageClick,
     handleLikeClick,
@@ -8,7 +8,7 @@ export default class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._id = _id || id;
+    this._id = _id || data._id;
     this._isLiked = isLiked || false;
     this._cardSelector = cardSelector;
     this._imageClick = handleImageClick;
@@ -19,7 +19,17 @@ export default class Card {
   _getTemplate() {
     const template = document.querySelector(this._cardSelector);
 
-    const cardElement = template.content.querySelector(".card").cloneNode(true);
+    if (!template) {
+      return null;
+    }
+
+    const cardContent = template.content.querySelector(".card");
+
+    if (!cardContent) {
+      return null;
+    }
+
+    const cardElement = cardContent.cloneNode(true);
 
     return cardElement;
   }
@@ -92,6 +102,7 @@ export default class Card {
     this._cardElement = this._getTemplate();
 
     if (!this._cardElement) {
+      console.warn("⚠️ _cardElement is null for:", this._name);
       return null;
     }
 

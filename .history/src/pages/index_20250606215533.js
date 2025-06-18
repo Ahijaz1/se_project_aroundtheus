@@ -30,8 +30,8 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+api
+  .getAppInfo()
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
       name: userData.name,
@@ -39,12 +39,11 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     });
     userInfo.setAvatar(userData.avatar);
 
-    cardSection = new Section(
+    const cardSection = new Section(
       {
         items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
-
+        renderer: (cardData) => {
+          const card = createCard(cardData);
           cardSection.addItem(card.getView());
         },
       },
@@ -277,5 +276,5 @@ function createCard(cardData) {
     handleLikeClick,
     handleDeleteCard
   );
-  return card;
+  return card.getView();
 }

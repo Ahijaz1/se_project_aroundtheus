@@ -30,22 +30,27 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
-  .then(([userData, cards]) => {
+const cardSelector = "#card-template";
+let cardSection = null;
+
+api
+  .getUserInfo()
+  .then((userData) => {
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
+
     userInfo.setAvatar(userData.avatar);
+
+    const initialCards = constants.getInitialCards();
 
     cardSection = new Section(
       {
-        items: cards,
+        items: initialCards,
         renderer: (item) => {
-          const card = createCard(item);
-
-          cardSection.addItem(card.getView());
+          const cardElement = createCard(item);
+          return cardElement;
         },
       },
       ".cards__list"
@@ -53,7 +58,7 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
 
     cardSection.renderItems();
   })
-  .catch((err) => console.error("Error in getAppInfo:", err));
+  .catch((err) => console.error("User info fetch error:", err));
 
 // DOM Elements //
 const profileEditButton = document.querySelector("#profile-edit-button");
@@ -118,8 +123,7 @@ const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
     })
     .then((cardData) => {
       const card = createCard(cardData);
-      cardSection.addItem(card.getView());
-
+      cardSection.addItem(card);
       formValidators["add-card-form"].disableButton();
       newCardPopup.resetForm();
       newCardPopup.close();
@@ -248,7 +252,6 @@ function handleImageClick(data) {
 }
 
 function handleLikeClick(card) {
-  console.log(card);
   const cardId = card.cardId;
   const isLiked = card.isLiked;
 
@@ -277,5 +280,5 @@ function createCard(cardData) {
     handleLikeClick,
     handleDeleteCard
   );
-  return card;
+  return card.getView();
 }

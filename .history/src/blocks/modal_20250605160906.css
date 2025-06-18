@@ -164,6 +164,23 @@
   min-height: 30px;
 }
 
+/*
+.modal__container_delete-confirmation {
+  height: 181px;
+  margin-top: 270px;
+}
+
+.modal__container_avatar {
+  margin-top: 224px;
+  height: 272px;
+}
+.modal__button_type_avatar:disabled {
+  background-color: #000;
+  color: #fff;
+  opacity: 0.3;
+}
+*/
+
 @media only screen and (max-width: 600px) {
   .modal__container {
     width: 282px;

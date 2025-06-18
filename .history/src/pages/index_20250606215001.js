@@ -30,8 +30,8 @@ const userInfo = new UserInfo({
 });
 
 // Initial card rendering //
-let cardSection;
-Promise.all([api.getUserInfo(), api.getInitialCards()])
+capi
+  .getAppInfo()
   .then(([userData, cards]) => {
     userInfo.setUserInfo({
       name: userData.name,
@@ -39,19 +39,18 @@ Promise.all([api.getUserInfo(), api.getInitialCards()])
     });
     userInfo.setAvatar(userData.avatar);
 
-    cardSection = new Section(
+    const cardSection = new Section(
       {
-        items: cards,
-        renderer: (item) => {
-          const card = createCard(item);
-
+        items: cards, // ✅ add this line
+        renderer: (cardData) => {
+          const card = createCard(cardData);
           cardSection.addItem(card.getView());
         },
       },
       ".cards__list"
     );
 
-    cardSection.renderItems();
+    cardSection.renderItems(); // ✅ now it will work
   })
   .catch((err) => console.error("Error in getAppInfo:", err));
 

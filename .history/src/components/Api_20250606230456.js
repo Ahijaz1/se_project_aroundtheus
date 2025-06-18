@@ -34,7 +34,7 @@ class Api {
       headers: this._headers,
       body: JSON.stringify({
         name: data.name,
-        about: data.about,
+        about: data.about, // expecting api
       }),
     }).then(this._checkResponse);
   }
@@ -47,14 +47,10 @@ class Api {
   }
 
   addCard(data) {
-    return fetch(`${this._baseUrl}/cards`, {
+    return this._request("/cards", {
       method: "POST",
-      headers: this._headers,
-      body: JSON.stringify({
-        name: data.name,
-        link: data.link,
-      }),
-    }).then(this._checkResponse);
+      body: JSON.stringify(data),
+    });
   }
 
   deleteCard(cardId) {

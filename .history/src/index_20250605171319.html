@@ -17,14 +17,11 @@
       </header>
       <main class="content">
         <section class="profile page__section">
-          <div class="profile__image-container">
-            <img
-              src="<%= require('./images/card-images/Avatar.png') %>"
-              alt="Avatar"
-              class="profile__image"
-            />
-            <button type="button" class="profile__image-edit"></button>
-          </div>
+          <img
+            src="<%= require('./images/card-images/Avatar.png') %>"
+            alt="Avatar"
+            class="profile__image"
+          />
           <div class="profile__info">
             <h1 class="profile__title" id="profile-title">Jacques Cousteau</h1>
             <button
@@ -153,12 +150,12 @@
             type="button"
             aria-label="Like"
           ></button>
+          <button
+            class="card__delete-button"
+            type="button"
+            aria-label="Delete"
+          ></button>
         </div>
-        <button
-          class="card__delete-button"
-          type="button"
-          aria-label="Delete"
-        ></button>
       </li>
     </template>
 
