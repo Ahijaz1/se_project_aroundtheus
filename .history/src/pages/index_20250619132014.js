@@ -20,7 +20,7 @@ const settings = constants.getValidationSettings();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "1f616cc6-fc96-44c0-aaaa-3577f202380e",
+    authorization: "27b2a5b6-103d-456b-911c-4b9f1fd71092",
     "Content-Type": "application/json",
   },
 });
@@ -31,25 +31,18 @@ const userInfo = new UserInfo({
   avatarSelector: ".profile__image",
 });
 
-Promise.all([
-  Promise.resolve(constants.getInitialCards()),
-  api.getInitialCards(),
-  api.getUserInfo(),
-])
-  .then(([localCards, apiCards, userData]) => {
+// Initial card rendering //
+Promise.all([api.getUserInfo(), api.getInitialCards()])
+  .then(([userData, cardsFromApi]) => {
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
     userInfo.setAvatar(userData.avatar);
 
-    const allCards = [
-      ...localCards.map((card) => ({ ...card, isLocal: true })),
-      ...apiCards.map((card) => ({ ...card, isLocal: false })),
-    ];
     cardSection = new Section(
       {
-        items: allCards,
+        items: cardsFromApi,
         renderer: (item) => {
           const card = createCard(item);
           return card.getView();
@@ -89,7 +82,7 @@ const deleteSubmitButton = document.querySelector(
 const avatarFormElement = document.querySelector(
   "#avatar-edit-modal .modal__form"
 );
-const profileImageEditButton = document.querySelector(".profile__image-edit");
+const profileImageEditButton = document.querySelector(".profile__image");
 const avatarSubmitButton = document.querySelector(
   "#avatar-edit-modal .modal__button"
 );
@@ -124,7 +117,7 @@ const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
     })
     .then((cardData) => {
       const card = createCard(cardData);
-      cardSection.addItem(card.getView());
+      cardSection.addItem(card.getView()); // <-- call getView() here too
       formValidators["add-card-form"].disableButton();
       newCardPopup.resetForm();
       newCardPopup.close();
@@ -167,32 +160,37 @@ const imagePopup = new PopupWithImage("#preview-image-modal");
 
 let cardToDelete = null;
 
-const deleteCardPopup = new PopupWithSubmit("#delete-card-modal", (card) => {
+const deleteCardPopup = new PopupWithSubmit("#delete-card-modal", () => {
+  if (!cardToDelete) return;
+
   deleteSubmitButton.textContent = "Deleting...";
 
-  if (card.isLocal || !card.cardId) {
-    card.remove();
-    deleteCardPopup.close();
-    deleteSubmitButton.textContent = "Save";
-    return;
-  }
+  const cardId = cardToDelete.cardId;
 
-  api
-    .deleteCard(card.cardId)
-    .then(() => {
-      card.remove();
-      deleteCardPopup.close();
-    })
-    .catch((err) => console.error(err))
-    .finally(() => {
-      deleteSubmitButton.textContent = "Save";
-    });
+  if (cardId) {
+    api
+      .deleteCard(cardId)
+      .then(() => {
+        deleteCardPopup.close();
+        cardToDelete = null;
+      })
+      .catch((err) => console.error(err))
+      .finally(() => {
+        deleteSubmitButton.textContent = "Save";
+      });
+  } else {
+    cardToDelete.remove();
+    deleteCardPopup.close();
+    cardToDelete = null;
+    deleteSubmitButton.textContent = "Save";
+  }
 });
 
 deleteCardPopup.setEventListeners();
 
 function handleDeleteCard(card) {
-  deleteCardPopup.open(card);
+  cardToDelete = card;
+  deleteCardPopup.open();
 }
 
 // Avatar form //
@@ -203,14 +201,7 @@ const avatarEditPopup = new PopupWithForm(
 
     api
       .setUserAvatar(inputValues.avatar)
-      .then(() => {
-        return api.getUserInfo();
-      })
       .then((userData) => {
-        userInfo.setUserInfo({
-          name: userData.name,
-          description: userData.about,
-        });
         userInfo.setAvatar(userData.avatar);
         avatarEditPopup.resetForm();
         avatarEditPopup.close();
@@ -225,10 +216,7 @@ const avatarEditPopup = new PopupWithForm(
 avatarEditPopup.setEventListeners();
 
 // Event Listeners for buttons opening popups //
-const avatarUrlInput = document.querySelector("#profile-avatar-input");
-
 profileImageEditButton.addEventListener("click", () => {
-  avatarUrlInput.value = userInfo.getAvatar() || "";
   formValidators["avatar-edit-form"].resetValidation();
   avatarEditPopup.open();
 });
@@ -262,8 +250,7 @@ function handleLikeClick(card) {
   const isLiked = card.isLiked;
 
   if (!cardId) {
-    // Local card: toggle like locally only //
-    card.setLikeStatus(!isLiked);
+    console.warn("Cannot like/unlike a card without an ID");
     return;
   }
 
@@ -285,16 +272,8 @@ function handleLikeClick(card) {
 }
 
 function createCard(cardData) {
-  const isLocal = cardData.isLocal;
-  const cardId = isLocal ? null : cardData._id;
-
   return new Card(
-    {
-      ...cardData,
-      cardId: cardId,
-      isLocal: isLocal,
-      isLiked: cardData.isLiked || false,
-    },
+    cardData,
     "#card-template",
     handleImageClick,
     handleLikeClick,

@@ -37,12 +37,14 @@ Promise.all([
   api.getUserInfo(),
 ])
   .then(([localCards, apiCards, userData]) => {
+    // First set the user info correctly from the API
     userInfo.setUserInfo({
       name: userData.name,
       description: userData.about,
     });
     userInfo.setAvatar(userData.avatar);
 
+    // Then continue rendering cards like before
     const allCards = [
       ...localCards.map((card) => ({ ...card, isLocal: true })),
       ...apiCards.map((card) => ({ ...card, isLocal: false })),
@@ -89,7 +91,7 @@ const deleteSubmitButton = document.querySelector(
 const avatarFormElement = document.querySelector(
   "#avatar-edit-modal .modal__form"
 );
-const profileImageEditButton = document.querySelector(".profile__image-edit");
+const profileImageEditButton = document.querySelector(".profile__image");
 const avatarSubmitButton = document.querySelector(
   "#avatar-edit-modal .modal__button"
 );
@@ -124,7 +126,7 @@ const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
     })
     .then((cardData) => {
       const card = createCard(cardData);
-      cardSection.addItem(card.getView());
+      cardSection.addItem(card.getView()); // <-- call getView() here too
       formValidators["add-card-form"].disableButton();
       newCardPopup.resetForm();
       newCardPopup.close();
@@ -204,6 +206,7 @@ const avatarEditPopup = new PopupWithForm(
     api
       .setUserAvatar(inputValues.avatar)
       .then(() => {
+        // After setting avatar, fetch fresh user info
         return api.getUserInfo();
       })
       .then((userData) => {
@@ -228,6 +231,7 @@ avatarEditPopup.setEventListeners();
 const avatarUrlInput = document.querySelector("#profile-avatar-input");
 
 profileImageEditButton.addEventListener("click", () => {
+  // Pre-fill the avatar input with the current avatar URL
   avatarUrlInput.value = userInfo.getAvatar() || "";
   formValidators["avatar-edit-form"].resetValidation();
   avatarEditPopup.open();
@@ -262,11 +266,12 @@ function handleLikeClick(card) {
   const isLiked = card.isLiked;
 
   if (!cardId) {
-    // Local card: toggle like locally only //
+    // Local card: toggle like locally only
     card.setLikeStatus(!isLiked);
     return;
   }
 
+  // API card: send request to server
   if (isLiked) {
     api
       .deleteCardLike(cardId)

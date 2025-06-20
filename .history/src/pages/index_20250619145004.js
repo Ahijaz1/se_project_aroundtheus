@@ -20,7 +20,7 @@ const settings = constants.getValidationSettings();
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
-    authorization: "1f616cc6-fc96-44c0-aaaa-3577f202380e",
+    authorization: "27b2a5b6-103d-456b-911c-4b9f1fd71092",
     "Content-Type": "application/json",
   },
 });
@@ -34,15 +34,8 @@ const userInfo = new UserInfo({
 Promise.all([
   Promise.resolve(constants.getInitialCards()),
   api.getInitialCards(),
-  api.getUserInfo(),
 ])
-  .then(([localCards, apiCards, userData]) => {
-    userInfo.setUserInfo({
-      name: userData.name,
-      description: userData.about,
-    });
-    userInfo.setAvatar(userData.avatar);
-
+  .then(([localCards, apiCards]) => {
     const allCards = [
       ...localCards.map((card) => ({ ...card, isLocal: true })),
       ...apiCards.map((card) => ({ ...card, isLocal: false })),
@@ -57,6 +50,7 @@ Promise.all([
       },
       ".cards__list"
     );
+
     cardSection.renderItems();
   })
   .catch((err) => console.error("Error:", err));
@@ -89,7 +83,7 @@ const deleteSubmitButton = document.querySelector(
 const avatarFormElement = document.querySelector(
   "#avatar-edit-modal .modal__form"
 );
-const profileImageEditButton = document.querySelector(".profile__image-edit");
+const profileImageEditButton = document.querySelector(".profile__image");
 const avatarSubmitButton = document.querySelector(
   "#avatar-edit-modal .modal__button"
 );
@@ -124,7 +118,7 @@ const newCardPopup = new PopupWithForm("#add-card-modal", (inputValues) => {
     })
     .then((cardData) => {
       const card = createCard(cardData);
-      cardSection.addItem(card.getView());
+      cardSection.addItem(card.getView()); // <-- call getView() here too
       formValidators["add-card-form"].disableButton();
       newCardPopup.resetForm();
       newCardPopup.close();
@@ -170,7 +164,11 @@ let cardToDelete = null;
 const deleteCardPopup = new PopupWithSubmit("#delete-card-modal", (card) => {
   deleteSubmitButton.textContent = "Deleting...";
 
-  if (card.isLocal || !card.cardId) {
+  const cardId = card.cardId;
+  const isLocal = card.isLocal;
+
+  if (isLocal || !cardId) {
+    // Local card: just remove without calling API
     card.remove();
     deleteCardPopup.close();
     deleteSubmitButton.textContent = "Save";
@@ -178,9 +176,9 @@ const deleteCardPopup = new PopupWithSubmit("#delete-card-modal", (card) => {
   }
 
   api
-    .deleteCard(card.cardId)
+    .deleteCard(cardId)
     .then(() => {
-      card.remove();
+      card.remove(); // Remove from UI after successful API delete
       deleteCardPopup.close();
     })
     .catch((err) => console.error(err))
@@ -203,14 +201,7 @@ const avatarEditPopup = new PopupWithForm(
 
     api
       .setUserAvatar(inputValues.avatar)
-      .then(() => {
-        return api.getUserInfo();
-      })
       .then((userData) => {
-        userInfo.setUserInfo({
-          name: userData.name,
-          description: userData.about,
-        });
         userInfo.setAvatar(userData.avatar);
         avatarEditPopup.resetForm();
         avatarEditPopup.close();
@@ -225,10 +216,7 @@ const avatarEditPopup = new PopupWithForm(
 avatarEditPopup.setEventListeners();
 
 // Event Listeners for buttons opening popups //
-const avatarUrlInput = document.querySelector("#profile-avatar-input");
-
 profileImageEditButton.addEventListener("click", () => {
-  avatarUrlInput.value = userInfo.getAvatar() || "";
   formValidators["avatar-edit-form"].resetValidation();
   avatarEditPopup.open();
 });
@@ -262,8 +250,7 @@ function handleLikeClick(card) {
   const isLiked = card.isLiked;
 
   if (!cardId) {
-    // Local card: toggle like locally only //
-    card.setLikeStatus(!isLiked);
+    console.warn("Cannot like/unlike a card without an ID");
     return;
   }
 
@@ -285,15 +272,10 @@ function handleLikeClick(card) {
 }
 
 function createCard(cardData) {
-  const isLocal = cardData.isLocal;
-  const cardId = isLocal ? null : cardData._id;
-
   return new Card(
     {
       ...cardData,
-      cardId: cardId,
-      isLocal: isLocal,
-      isLiked: cardData.isLiked || false,
+      cardId: cardData._id, // Pass cardId inside the object
     },
     "#card-template",
     handleImageClick,

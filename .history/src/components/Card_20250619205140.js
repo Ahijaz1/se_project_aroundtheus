@@ -8,9 +8,9 @@ export default class Card {
   ) {
     this._name = name;
     this._link = link;
-    this._id = cardId;
+    this._id = cardId; // <-- use cardId only
     this._isLiked = isLiked || false;
-    this._isLocal = isLocal;
+    this._isLocal = isLocal; // store isLocal
     this._cardSelector = cardSelector;
     this._imageClick = handleImageClick;
     this._handleLikeClick = handleLikeClick;
