@@ -16,7 +16,7 @@ let cardSection;
 const constants = new Constants();
 const settings = constants.getValidationSettings();
 
-// API ///
+// API //
 const api = new Api({
   baseUrl: "https://around-api.en.tripleten-services.com/v1",
   headers: {
