@@ -78,3 +78,13 @@
   transition: 0.2s, ease-in;
   cursor: pointer;
 }
+
+.card__name {
+  font-size: 24px;
+  line-height: 29.05px;
+  margin: 0;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  overflow: hidden;
+  max-width: 220px;
+}

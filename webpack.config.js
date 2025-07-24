@@ -6,11 +6,21 @@ const MiniCssExtractPlugin = require("mini-css-extract-plugin");
 
 module.exports = {
   devtool: "inline-source-map",
+<<<<<<< HEAD
   entry: "./src/pages/index.js",
+=======
+  entry: {
+    main: "./src/pages/index.js",
+  },
+>>>>>>> 1dcf5b6 (fixes to code review)
   output: {
     path: path.resolve(__dirname, "dist"),
     filename: "main.js",
     publicPath: "",
+<<<<<<< HEAD
+=======
+    assetModuleFilename: "assets/[hash][ext][query]",
+>>>>>>> 1dcf5b6 (fixes to code review)
   },
   target: ["web", "es5"],
   stats: "errors-only",
@@ -49,6 +59,10 @@ module.exports = {
   plugins: [
     new HtmlWebpackPlugin({
       template: "./src/index.html",
+<<<<<<< HEAD
+=======
+      favicon: "./src/favicon.ico",
+>>>>>>> 1dcf5b6 (fixes to code review)
     }),
     new CleanWebpackPlugin(),
     new MiniCssExtractPlugin(),
