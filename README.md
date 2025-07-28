@@ -1,10 +1,11 @@
-<<<<<<< HEAD
-=======
+# Project 9: Around the U.S
+
+For Project 9 I focused on building a fully functional, interactive web app using JavaScript, where users can manage their profile and cards via server integration. The app interacts with a REST API to fetch and update user data, manage cards (create, delete, like), and update the avatar.
+
 # Project 9: Around the U.S
 
 For Project 9 I focused on building a fully functional, interactive web app using JavaScript, where users can manage their profile and cards via server integration. The app must interact with a REST API to fetch and update user data, manage cards (create, delete, like), and update the avatar.
 
->>>>>>> 1dcf5b6 (fixes to code review)
 # Project 8: Around the U.S
 
 Ive successfully worked through creating more classes and combining them together, I set up a project bundling and building with Webpack. Also implemented the setInputValues method for my popup form. My project structure looks cleaner and will be easier to find things. A great challenge but we go through it.
